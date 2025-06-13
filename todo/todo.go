@@ -3,6 +3,7 @@ package todo
 import (
 	"fmt"
 	"slices"
+	"todo_list/save"
 )
 
 // helps delete task
@@ -23,15 +24,21 @@ func CreateTask(tasks []string, task string) []string {
 }
 
 // helps print tasks
-func PrintTasks(tasks []string) {
-	if len(tasks) == 0 {
+func PrintTasks(FILE_PATH string) {
+	if FILE_PATH == "" {
 		fmt.Print("No task found")
 		return
 	}
-	for i := range tasks {
-		fmt.Println("Task Id: ", i)
-		fmt.Println("        Task -", tasks[i])
+	save.PrintTasks(FILE_PATH)
+}
+
+func MarkDone(FILE_PATH, task string) {
+	if FILE_PATH == "" || task == "" {
+		fmt.Print("No task found")
+		return
 	}
+	save.MarkDone(FILE_PATH, task)
+
 }
 
 // print the usages and help
